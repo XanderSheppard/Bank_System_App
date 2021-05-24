@@ -1,9 +1,7 @@
 import datetime
 import random
+import database
 
-
-
-database = {} #dictionary
 
 
 
