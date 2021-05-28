@@ -12,14 +12,14 @@ def init():
     haveAccount = int(input("How can I help you Today: (1) ATM (2) Login (3) Create An Account (4)Exit \n"))
 
     if(haveAccount == 1):
-        isValidOptionSelected = True
         atm()
+
     elif(haveAccount == 2):
-        isValidOptionSelected = True
         login()
+
     elif(haveAccount == 3):
-            isValidOptionSelected = True
-            register()
+        register()
+
     elif(haveAccount == 4):
         exit()
     else:
@@ -149,13 +149,17 @@ def bankOperation(user):
 
 
 def withdrawalOperation(user):
-    print("withdrawal")
-    # get current balence   
-    # get amount to withdrew
-    # check if current balance > withdrew balance
-    # deduct withdran amount from current balance
-    # display current balance
+   current_balance = int(get_current_balance(user))
+   amount_to_withdrawal = int(input("How much do you want to withdrawal"))
+   current_balance -= amount_to_withdrawal
+   set_current_balance(user, str(current_balance))
 
+
+   if database.update(accountNumberFromUser, user):
+       print("Your account balance is {}".format(current_balance))
+       bankOperation(user)
+   else:
+        print("Transaction not successful")
 
 def depositOperation(user):
    
