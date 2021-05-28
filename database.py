@@ -9,7 +9,7 @@
 import os
 import validation
 
-user_db_path = "data/user_record/"
+user_db_path = "data/bank_record/"
 auth_session_path = "data/auth_session/"
 
 
@@ -132,24 +132,24 @@ def does_email_exist(email):
     return False
 
 
-def does_account_number_exist(account_number):
+def does_account_number_exist(accountNumber):
 
     all_users = os.listdir(user_db_path)
 
     for user in all_users:
 
-        if user == str(account_number) + ".txt":
+        if user == str(accountNumber) + ".txt":
 
             return True
 
     return False
 
 
-def authenticated_user(account_number, password):
+def authenticated_user(accountNumber, password):
 
-    if does_account_number_exist(account_number):
+    if does_account_number_exist(accountNumber):
 
-        user = str.split(read(account_number), ',')
+        user = str.split(read(accountNumber), ',')
 
         if password == user[3]:
             return user
@@ -157,15 +157,15 @@ def authenticated_user(account_number, password):
     return False
 
 
-def login_auth_session(account_number, user_details):
+def login_auth_session(accountNumber, user_details):
     
     data = user_details[0] + " " + user_details[1] + " logged in."
 
     try:
-        f = open(auth_session_path + str(account_number) + ".txt", "x")
+        f = open(auth_session_path + str(accountNumber) + ".txt", "x")
     
     except FileExistsError:
-        f = open(auth_session_path + str(account_number) + ".txt", "w")
+        f = open(auth_session_path + str(accountNumber) + ".txt", "w")
 
     else:
         f.write(data)
